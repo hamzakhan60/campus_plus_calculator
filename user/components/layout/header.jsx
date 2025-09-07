@@ -86,6 +86,17 @@ export default function Header() {
                         <div className="text-xs text-gray-500">Find available rooms</div>
                       </div>
                     </Link>
+                    <Link
+                      href="/memory-map"
+                      className="flex items-center space-x-3 px-4 py-3 text-gray-700 hover:bg-gray-50 hover:text-[#1E1F4A] transition-colors"
+                      onClick={() => setIsDropdownOpen(false)}
+                    >
+                      <MapPin className="w-4 h-4" />
+                      <div>
+                        <div className="font-medium">Memory Map</div>
+                        <div className="text-xs text-gray-500">Create and share memory maps</div>
+                      </div>
+                    </Link>
                     <div className="flex items-center space-x-3 px-4 py-3 text-gray-400 cursor-not-allowed">
                       <Calculator className="w-4 h-4" />
                       <div>
@@ -93,13 +104,7 @@ export default function Header() {
                         <div className="text-xs text-gray-400">Coming Soon</div>
                       </div>
                     </div>
-                    <div className="flex items-center space-x-3 px-4 py-3 text-gray-400 cursor-not-allowed">
-                      <MapPin className="w-4 h-4" />
-                      <div>
-                        <div className="font-medium">Memory Map</div>
-                        <div className="text-xs text-gray-400">Coming Soon</div>
-                      </div>
-                    </div>
+                    
                     <div className="flex items-center space-x-3 px-4 py-3 text-gray-400 cursor-not-allowed">
                       <Calendar className="w-4 h-4" />
                       <div>
@@ -182,6 +187,7 @@ export default function Header() {
             >
               Room Finder
             </Link>
+            
             <div className="block text-gray-400 font-medium cursor-not-allowed">GPA Calculator (Coming Soon)</div>
             <div className="block text-gray-400 font-medium cursor-not-allowed">Memory Map (Coming Soon)</div>
             <div className="block text-gray-400 font-medium cursor-not-allowed">Class Schedule (Coming Soon)</div>
