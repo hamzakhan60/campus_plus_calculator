@@ -73,7 +73,7 @@ export default function RoomFinder() {
 
       if (filters.selectedRoom && filters.selectedRoom.trim() !== "") {
         console.log("Applying room filter:", filters.selectedRoom)
-        query = query.eq("room", filters.selectedRoom.trim().toUpperCase())
+        query = query.eq("room", filters.selectedRoom.trim())
       }
 
       if (filters.selectedBlock && filters.selectedBlock !== "all" && filters.selectedBlock !== "") {
