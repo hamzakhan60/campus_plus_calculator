@@ -83,7 +83,7 @@ export default function Footer() {
         </div>
 
         <div className="border-t border-blue-800 mt-8 pt-8 text-center text-blue-100">
-          <p className="font-medium">&copy; 2024 COMSATS PLUS. Made with ❤️ for COMSATS University Lahore students.</p>
+          <p className="font-medium">&copy; 2025 COMSATS PLUS. Made with ❤️ for COMSATS University Lahore students.</p>
         </div>
       </div>
     </footer>
