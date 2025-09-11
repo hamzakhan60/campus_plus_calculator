@@ -1,8 +1,9 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { Mail, Phone, MapPin, Send, MessageCircle, Clock, CheckCircle } from "lucide-react"
+import { Mail, MapPin, Send, MessageCircle, Clock, CheckCircle } from "lucide-react"
 import { useState, useEffect } from "react"
+import FAQ from "../../components/common/faq"
 
 export default function ContactPageClient() {
   const [formData, setFormData] = useState({
@@ -60,7 +61,7 @@ export default function ContactPageClient() {
       <section className="pt-24 pb-16 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-gray-50 to-white">
         <div className="max-w-4xl mx-auto text-center">
           <motion.div
-            initial={{ opacity: 0, y: 40 }}
+            initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
             className="space-y-6"
@@ -80,7 +81,7 @@ export default function ContactPageClient() {
           <div className="grid lg:grid-cols-2 gap-12">
             {/* Contact Form */}
             <motion.div
-              initial={{ opacity: 0, x: -40 }}
+              initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6 }}
               className="space-y-8"
@@ -94,7 +95,7 @@ export default function ContactPageClient() {
 
               {isSubmitted ? (
                 <motion.div
-                  initial={{ opacity: 0, scale: 0.8 }}
+                  initial={{ opacity: 0, scale: 0.9 }}
                   animate={{ opacity: 1, scale: 1 }}
                   className="bg-green-50 border border-green-200 rounded-xs p-6 text-center"
                 >
@@ -160,6 +161,7 @@ export default function ContactPageClient() {
                       <option value="help-support">Help & Support</option>
                       <option value="room-finder-issue">Room Finder Issue</option>
                       <option value="gpa-calculator-issue">GPA Calculator Issue</option>
+                      <option value="contribution-inquiry">Contribution Inquiry</option>
                     </select>
                   </div>
 
@@ -174,11 +176,24 @@ export default function ContactPageClient() {
                             onClick={() => setFormData((prev) => ({ ...prev, rating: star }))}
                             whileHover={{ scale: 1.1 }}
                             whileTap={{ scale: 0.9 }}
-                            className={`text-2xl transition-colors duration-200 ${
-                              (formData.rating || 0) >= star ? "text-yellow-400" : "text-gray-300"
-                            }`}
+                            className="text-2xl transition-colors duration-200"
                           >
-                            ⭐
+                            <svg
+                              className={`w-6 h-6 ${
+                                (formData.rating || 0) >= star ? "text-yellow-400 fill-current" : "text-gray-300"
+                              }`}
+                              fill={formData.rating >= star ? "currentColor" : "none"}
+                              stroke="currentColor"
+                              viewBox="0 0 24 24"
+                              xmlns="http://www.w3.org/2000/svg"
+                            >
+                              <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth={2}
+                                d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"
+                              />
+                            </svg>
                           </motion.button>
                         ))}
                         <span className="ml-3 text-sm text-gray-600 font-medium">
@@ -248,19 +263,8 @@ export default function ContactPageClient() {
                   </div>
                   <div>
                     <h3 className="font-bold text-[#1E1F4A] mb-1">Email</h3>
-                    <p className="text-gray-600 font-medium">contact@cuiplus.com</p>
+                    <p className="text-gray-600 font-medium">comsatsplus@gmail.com</p>
                     <p className="text-sm text-gray-500 font-medium">We'll respond within 24 hours</p>
-                  </div>
-                </div>
-
-                <div className="flex items-start space-x-4">
-                  <div className="w-12 h-12 bg-gradient-to-r from-[#1E1F4A] to-blue-600 rounded-xs flex items-center justify-center flex-shrink-0">
-                    <Phone className="w-6 h-6 text-white" />
-                  </div>
-                  <div>
-                    <h3 className="font-bold text-[#1E1F4A] mb-1">Phone</h3>
-                    <p className="text-gray-600 font-medium">+92 300 1234567</p>
-                    <p className="text-sm text-gray-500 font-medium">Mon-Fri, 9AM-6PM</p>
                   </div>
                 </div>
 
@@ -305,62 +309,11 @@ export default function ContactPageClient() {
       </section>
 
       {/* FAQ Section */}
-      <section className="py-16 px-4 sm:px-6 lg:px-8 bg-gray-50">
-        <div className="max-w-4xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-            className="text-center mb-12"
-          >
-            <h2 className="text-3xl font-bold text-[#1E1F4A] mb-4">Frequently Asked Questions</h2>
-            <p className="text-gray-600 text-lg font-medium">Quick answers to common questions about COMSATS PLUS.</p>
-          </motion.div>
-
-          <div className="space-y-6">
-            {[
-              {
-                question: "Is COMSATS PLUS free to use?",
-                answer:
-                  "Yes! COMSATS PLUS is completely free for all COMSATS University Lahore students. Our goal is to help students, not profit from them.",
-              },
-              {
-                question: "How accurate is the room finder feature?",
-                answer:
-                  "Our room finder uses real-time data and is updated every few minutes. We maintain 99%+ accuracy by cross-referencing multiple data sources.",
-              },
-              {
-                question: "Can I suggest new features?",
-                answer:
-                  "We love hearing from students. Use the contact form above or join our community chat to share your ideas.",
-              },
-              {
-                question: "Is my data secure?",
-                answer:
-                  "Yes, we take privacy seriously. We only collect necessary information and never share personal data with third parties.",
-              },
-              {
-                question: "Will COMSATS PLUS work on my phone?",
-                answer:
-                  "COMSATS PLUS is designed to work perfectly on all devices - phones, tablets, and computers. We're also working on native mobile apps.",
-              },
-            ].map((faq, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                viewport={{ once: true }}
-                className="bg-white p-6 rounded-xs border border-gray-200 shadow-sm"
-              >
-                <h3 className="font-bold text-[#1E1F4A] mb-2">{faq.question}</h3>
-                <p className="text-gray-600 font-medium">{faq.answer}</p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
+      <FAQ 
+        title="Frequently Asked Questions"
+        description="Quick answers to common questions about COMSATS PLUS."
+        className="py-16"
+      />
     </div>
   )
 }

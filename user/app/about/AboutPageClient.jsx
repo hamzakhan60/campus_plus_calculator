@@ -5,35 +5,35 @@ import { Users, Target, Lightbulb, Heart, Code, ArrowRight, Github, Linkedin, Ma
 import Link from "next/link"
 
 export default function AboutPageClient() {
-  const developers = [
-    {
-      name: "Muhammad Ahmed",
-      role: "Full Stack Developer",
-      bio: "Computer Science student passionate about creating solutions that make student life easier.",
-      skills: ["React", "Node.js", "MongoDB", "Next.js"],
-      github: "#",
-      linkedin: "#",
-      email: "ahmed@cuiplus.com",
-    },
-    {
-      name: "Fatima Hassan",
-      role: "UI/UX Designer & Frontend Developer",
-      bio: "Software Engineering student with a keen eye for design and user experience.",
-      skills: ["Figma", "React", "Tailwind CSS", "Framer Motion"],
-      github: "#",
-      linkedin: "#",
-      email: "fatima@cuiplus.com",
-    },
-    {
-      name: "Ali Raza",
-      role: "Backend Developer",
-      bio: "Information Technology student specializing in server-side development and APIs.",
-      skills: ["Python", "Django", "PostgreSQL", "AWS"],
-      github: "#",
-      linkedin: "#",
-      email: "ali@cuiplus.com",
-    },
-  ]
+  // const developers = [
+  //   {
+  //     name: "Muhammad Ahmed",
+  //     role: "Full Stack Developer",
+  //     bio: "Computer Science student passionate about creating solutions that make student life easier.",
+  //     skills: ["React", "Node.js", "MongoDB", "Next.js"],
+  //     github: "#",
+  //     linkedin: "#",
+  //     email: "ahmed@cuiplus.com",
+  //   },
+  //   {
+  //     name: "Fatima Hassan",
+  //     role: "UI/UX Designer & Frontend Developer",
+  //     bio: "Software Engineering student with a keen eye for design and user experience.",
+  //     skills: ["Figma", "React", "Tailwind CSS", "Framer Motion"],
+  //     github: "#",
+  //     linkedin: "#",
+  //     email: "fatima@cuiplus.com",
+  //   },
+  //   {
+  //     name: "Ali Raza",
+  //     role: "Backend Developer",
+  //     bio: "Information Technology student specializing in server-side development and APIs.",
+  //     skills: ["Python", "Django", "PostgreSQL", "AWS"],
+  //     github: "#",
+  //     linkedin: "#",
+  //     email: "ali@cuiplus.com",
+  //   },
+  // ]
 
   return (
     <div className="min-h-screen bg-white">
@@ -149,7 +149,7 @@ export default function AboutPageClient() {
       </section>
 
       {/* Team Section */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8">
+      {/* <section className="py-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-6xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 40 }}
@@ -213,7 +213,7 @@ export default function AboutPageClient() {
             ))}
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* Values Section */}
       <section className="py-16 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-[#1E1F4A] to-blue-600">

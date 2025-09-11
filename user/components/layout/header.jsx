@@ -105,25 +105,14 @@ export default function Header() {
                       </div>
                     </div>
                     
-                    <div className="flex items-center space-x-3 px-4 py-3 text-gray-400 cursor-not-allowed">
-                      <Calendar className="w-4 h-4" />
-                      <div>
-                        <div className="font-medium">Class Schedule</div>
-                        <div className="text-xs text-gray-400">Coming Soon</div>
+                    <div className="border-t border-gray-100 my-2"></div>
+                    <div className="flex items-center space-x-3 px-4 py-3 text-gray-500">
+                      <div className="w-4 h-4 flex items-center justify-center">
+                        <div className="w-2 h-2 bg-gray-400 rounded-full"></div>
                       </div>
-                    </div>
-                    <div className="flex items-center space-x-3 px-4 py-3 text-gray-400 cursor-not-allowed">
-                      <Users className="w-4 h-4" />
                       <div>
-                        <div className="font-medium">Study Groups</div>
-                        <div className="text-xs text-gray-400">Coming Soon</div>
-                      </div>
-                    </div>
-                    <div className="flex items-center space-x-3 px-4 py-3 text-gray-400 cursor-not-allowed">
-                      <BookOpen className="w-4 h-4" />
-                      <div>
-                        <div className="font-medium">Resource Library</div>
-                        <div className="text-xs text-gray-400">Coming Soon</div>
+                        <div className="font-medium text-sm">More features coming soon</div>
+                        <div className="text-xs text-gray-400">Stay tuned for updates</div>
                       </div>
                     </div>
                   </div>
@@ -187,12 +176,15 @@ export default function Header() {
             >
               Room Finder
             </Link>
-            
+            <Link
+              href="/memory-map"
+              className="block text-gray-700 hover:text-[#1E1F4A] transition-colors font-medium"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              Memory Map
+            </Link>
             <div className="block text-gray-400 font-medium cursor-not-allowed">GPA Calculator (Coming Soon)</div>
-            <div className="block text-gray-400 font-medium cursor-not-allowed">Memory Map (Coming Soon)</div>
-            <div className="block text-gray-400 font-medium cursor-not-allowed">Class Schedule (Coming Soon)</div>
-            <div className="block text-gray-400 font-medium cursor-not-allowed">Study Groups (Coming Soon)</div>
-            <div className="block text-gray-400 font-medium cursor-not-allowed">Resource Library (Coming Soon)</div>
+            <div className="block text-gray-400 font-medium cursor-not-allowed text-sm">More features coming soon...</div>
             <Link
               href="/about"
               className="block text-gray-700 hover:text-[#1E1F4A] transition-colors font-medium"
