@@ -20,6 +20,12 @@ const eslintConfig = [
       "next-env.d.ts",
     ],
   },
+  {
+    rules: {
+      "react/no-unescaped-entities": "off", // disable the quotes rule
+    },
+  }
+
 ];
 
 export default eslintConfig;
