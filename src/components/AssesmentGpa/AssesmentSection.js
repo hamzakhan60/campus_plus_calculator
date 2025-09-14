@@ -2,7 +2,8 @@ import React from "react";
 import { Plus, X } from "lucide-react";
 import InputSection from "./InputSection";
 
-const AssessmentSection = React.memo(
+
+const AssessmentSectionComponent =
     ({
         course,
         section,
@@ -107,6 +108,10 @@ const AssessmentSection = React.memo(
             </div>
         </div>
     )
-);
+
+
+
+const AssessmentSection = React.memo(AssessmentSectionComponent);
+AssessmentSection.displayName = "AssessmentSection";
 
 export default AssessmentSection;
