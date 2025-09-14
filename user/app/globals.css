@@ -226,3 +226,17 @@
   font-size: 14px;
   color: #666;
 } 
+
+
+
+@theme {
+  --color-primary: #181935;
+  --color-secondary: #1959F1;
+  --color-background: #FBFCFD;
+}
+
+@layer components {
+  .bg-gradient-primary {
+    @apply bg-gradient-to-r from-primary to-secondary;
+  }
+}
