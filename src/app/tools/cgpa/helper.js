@@ -7,6 +7,8 @@ export const columnConfig = [
     type: "number",
     placeholder: "Current Credits",
     colSpan: 1,
+    toolTip:true,
+    toolTipMessage:"Total credit hours completed before the current semester"
   },
   {
     key: "current_cgpa",
@@ -14,6 +16,8 @@ export const columnConfig = [
     type: "number",
     placeholder: "Current CGPA",
     colSpan: 1,
+    toolTip:true,
+    toolTipMessage:"Your CGPA up to the last completed semester"
   },
   {
     key: "curr_semester_credits",
@@ -21,6 +25,8 @@ export const columnConfig = [
     type: "number",
     placeholder: "Current Semester Credits",
     colSpan: 1,
+    toolTip:true,
+    toolTipMessage:"Total credit hours of the current semester"
   },
   {
     key: "curr_semester_gpa",
@@ -28,6 +34,8 @@ export const columnConfig = [
     type: "number",
     placeholder: "Current Semester GPA",
     colSpan: 1,
+    toolTip:true,
+    toolTipMessage:"Your GPA for the current semester"
   },
 ];
 

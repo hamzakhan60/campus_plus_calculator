@@ -14,6 +14,7 @@ import {
   ExampleCalculationsColumns, 
   ExampleCalculationsRows 
 } from "./helper";
+import { validateCourseField } from '@/utils/validation';
 
 const AggregateCalculator = () => {
     const [aggregateData, setAggregateData] = useState([
@@ -24,45 +25,25 @@ const AggregateCalculator = () => {
     const [aggregate, setAggregate] = useState(0);
     const [errors, setErrors] = useState({});
 
-      // Validation function
-  const validateInput = (rowIndex, value, type) => {
-    const newErrors = { ...errors };
-    const errorKey = `${rowIndex}_${type}`;
-
-    if (value === '') {
-      delete newErrors[errorKey];
-    } else if (isNaN(value) || parseFloat(value) < 0) {
-      newErrors[errorKey] = 'Please enter a valid positive number';
-    } else if (type === 'obtained') {
-      const totalValue = aggregateData[rowIndex].total;
-      if (totalValue && parseFloat(value) > parseFloat(totalValue)) {
-        newErrors[errorKey] = 'Obtained marks cannot exceed total marks';
-      } else {
-        delete newErrors[errorKey];
-      }
-    } else {
-      delete newErrors[errorKey];
-    }
-
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
-  };
+  
 
   // Handler for input changes
   const handleAggregateChange = (rowIndex, fieldKey, value) => {
+    console.log("Row:", rowIndex, "Field:", fieldKey, "Value:", value);
+    console.log(aggregateData[rowIndex].total);
+    let validatedvalue= validateCourseField({ field: 'marks', value: value, relatedValue: fieldKey === 'obtained' ? aggregateData[rowIndex].total : null });
     const newData = [...aggregateData];
-    newData[rowIndex][fieldKey] = value;
+    newData[rowIndex][fieldKey] = validatedvalue.value;
     setAggregateData(newData);
-
-    // Validate input
-    if (fieldKey === 'total' || fieldKey === 'obtained') {
-      validateInput(rowIndex, value, fieldKey);
-
-      // If total changes, revalidate obtained
-      if (fieldKey === 'total' && newData[rowIndex].obtained) {
-        validateInput(rowIndex, newData[rowIndex].obtained, 'obtained');
-      }
+    if (validatedvalue.error) {
+      validatedvalue.rowIndex=rowIndex;
+      validatedvalue.fieldKey=fieldKey;
+    return validatedvalue;
+    } else {
+      return null;
     }
+
+   
   };
 
   // Calculate aggregate score

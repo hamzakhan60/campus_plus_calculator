@@ -23,6 +23,8 @@ export const aggregateConfig = [
     type: 'number',
     placeholder: 'Total',
     colSpan: 3,
+    toolTip:true,
+    position:"top",
   },
   {
     key: 'obtained',
@@ -30,6 +32,8 @@ export const aggregateConfig = [
     type: 'number',
     placeholder: 'Obtained',
     colSpan: 3,
+    toolTip:true,
+    position:"top"
   },
 ];
 
