@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import Header from '@/components/Header';
 import DescriptionText from '@/components/DescriptionText';
 import TipsSection from '@/components/TipsSection'
-import AssesmentGpa from '@/components/AssesmentGpa';
+import AssesmentGpa from '@/components/AssesmentGpa/index';
 import { gpaTips, gpaDescription } from "./helper";
 
 const AssesementCalculator = () => {
