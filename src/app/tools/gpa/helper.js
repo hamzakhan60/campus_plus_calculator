@@ -33,6 +33,9 @@ export const gpaConfig = [
     header: "Credit Hours",
     type: "number",
     placeholder: "Credit Hours",
+    toolTip: true,
+    toolTipMessage: "Enter credit hours (1-4)",
+    position: "top",
   },
 ];
 

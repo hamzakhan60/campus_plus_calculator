@@ -7,17 +7,18 @@ import FlexibleCalculator from '@/components/FlexibleCalculator';
 import ResultsSidebar from '@/components/ResultSidebar';
 import TipsSection from '@/components/TipsSection';
 import {
-  gpaOptions,
-  gpaConfig,
-  gpaTips,
-  GPADescription,
+    gpaOptions,
+    gpaConfig,
+    gpaTips,
+    GPADescription,
 } from "@/app/tools/gpa/helper";
+import { validateCourseField } from '@/utils/validation';
 
 
 const GPACalculator = () => {
     const [totalCr, setTotalCr] = useState(0);
     const [totalGradePoints, setTotalGradePoints] = useState(0.0);
-    const [currentGPA, setCurrentGPA] = useState(0);
+    const [currentGPA, setCurrentGPA] = useState(0.0);
 
 
     // GPA Calculator Data
@@ -31,9 +32,20 @@ const GPACalculator = () => {
 
     // Handlers for GPA Calculator
     const handleGpaChange = (rowIndex, fieldKey, value) => {
+        let validatedCreditHrs = null
+        if (fieldKey === 'creditHours') {
+            validatedCreditHrs = validateCourseField({ field: 'creditHours', value });
+        }
         const newData = [...gpaData];
-        newData[rowIndex][fieldKey] = value;
+        newData[rowIndex][fieldKey] = fieldKey === 'creditHours' ? validatedCreditHrs.value : value;
         setGpaData(newData);
+        if (validatedCreditHrs.error) {
+            validatedCreditHrs.rowIndex=rowIndex;
+            validatedCreditHrs.fieldKey=fieldKey;
+            return validatedCreditHrs;
+        }
+        else
+            return null;
     };
 
     const addGpaRow = () => {
@@ -47,7 +59,7 @@ const GPACalculator = () => {
         }
     };
 
-     // Calculate GPA
+    // Calculate GPA
     const calculateGPA = () => {
         let totalPoints = 0;
         let totalCredits = 0;
@@ -60,16 +72,17 @@ const GPACalculator = () => {
                 totalCredits += credits;
             }
         });
-        
+
         return {
             gpa: totalCredits > 0 ? totalPoints / totalCredits : 0,
             totalCredits,
             totalPoints
         };
     };
-     // Update calculations when gpaData changes
+    // Update calculations when gpaData changes
     useEffect(() => {
         const { gpa, totalCredits, totalPoints } = calculateGPA();
+        console.log("Calculated GPA:", gpa);
         setCurrentGPA(gpa);
         setTotalCr(totalCredits);
         setTotalGradePoints(totalPoints);
@@ -84,11 +97,11 @@ const GPACalculator = () => {
             { label: "Current GPA", value: currentGPA, decimals: 2, valueClass: "text-green-600" },
         ],
         remarks: currentGPA >= 3.5 ? "Great performance! Keep up the good work." :
-                currentGPA >= 3.0 ? "Good performance! Keep working hard." :
+            currentGPA >= 3.0 ? "Good performance! Keep working hard." :
                 currentGPA >= 2.5 ? "Average performance. Consider improving your study habits." :
-                "Below average. Focus on your studies to improve your GPA."
+                    "Below average. Focus on your studies to improve your GPA."
     };
-  return (
+    return (
         <div style={{ backgroundImage: `url(/bg.jpg)` }} className="min-h-screen relative overflow-hidden">
             <div className="relative z-10">
                 {/* Header */}
@@ -98,7 +111,7 @@ const GPACalculator = () => {
                     <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
                         {/* Left Column - Header Info */}
                         <div className="order-2 lg:order-1">
-                            <DescriptionText title={GPADescription.title}  description={GPADescription.description}/>
+                            <DescriptionText title={GPADescription.title} description={GPADescription.description} />
                         </div>
 
                         {/* Right Column - Calculator */}

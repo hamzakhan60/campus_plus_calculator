@@ -14,6 +14,7 @@ import {
   ExampleCalculationsRows,
   CGPADescription,
 } from "./helper";
+import { validateCourseField } from '@/utils/validation';
 
 
 const CGPACalculator = () => {
@@ -26,12 +27,24 @@ const CGPACalculator = () => {
     const [newCGPA, setNewCGPA]= useState(0.0)
 
     const handleDataChange = (rowIndex, fieldKey, value) => {
+        let validatedInput=null;
+        if(fieldKey=="curr_semester_gpa" || fieldKey=="current_cgpa")
+            validatedInput=validateCourseField({ field: "gpa", value });
+        else
+            validatedInput=validateCourseField({ field: "toalCredits", value });
         const newData = [...cgpaData];
         newData[rowIndex] = {
             ...newData[rowIndex],
-            [fieldKey]: value
+            [fieldKey]: validatedInput.value
         };
         setCgpaData(newData);
+        if(validatedInput.error){
+            validatedInput.rowIndex=rowIndex;
+            validatedInput.fieldKey=fieldKey;
+            return validatedInput;
+        }
+        else
+            return null;
     };
 
 
@@ -42,20 +55,22 @@ const CGPACalculator = () => {
         const currSemCredits = parseFloat(row.curr_semester_credits) || 0;
         const currSemGpa = parseFloat(row.curr_semester_gpa) || 0;
 
-        if (prevCredits === 0 && currSemCredits === 0) return null;
+        if (prevCredits === 0 && currSemCredits === 0) return 0.0;
 
         // CGPA Formula: [(Previous Credits × Current CGPA) + (Current Semester Credits × Current Semester GPA)] / (Previous Credits + Current Semester Credits)
         const numerator = (prevCredits * currentCgpa) + (currSemCredits * currSemGpa);
         const denominator = prevCredits + currSemCredits;
 
-        if (denominator === 0) return null;
-
-        return numerator / denominator;
+        if (denominator === 0) return 0.0;
+        console.log("Numerator:", numerator, "Denominator:", denominator);
+        console.log("Raw CGPA:", numerator / denominator);
+        return  Math.round((numerator / denominator) * 1000) / 1000;
     };
 
    // Use useEffect to calculate CGPA when cgpaData changes
     useEffect(() => {
         const calculatedCGPA = calculateNewCGPA();
+        console.log("Calculated CGPA:", calculatedCGPA)
         setNewCGPA(calculatedCGPA);
     }, [cgpaData]);
 
@@ -130,7 +145,7 @@ const CGPACalculator = () => {
                                             showAddButton={false} // Only one calculation at a time
                                             addButtonText="Add Calculation"
                                             result={newCGPA}
-                                            resultLabel="Required GPA"
+                                            resultLabel="Current CGPA"
                                         />
                                     </div>  
 

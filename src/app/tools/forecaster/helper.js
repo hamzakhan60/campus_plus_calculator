@@ -2,10 +2,13 @@
 export const columnConfig = [
   {
     key: "prev_credits",
-    header: "Current Credits",
+    header: "Previous Credits",
     type: "number",
-    placeholder: "Current Credit Hours",
+    placeholder: "Previous Credit Hours",
     colSpan: 1,
+    toolTip:true,
+    toolTipMessage:"Total credit hours completed before the current semester"
+
   },
   {
     key: "current_cgpa",
@@ -13,6 +16,8 @@ export const columnConfig = [
     type: "number",
     placeholder: "Current CGPA",
     colSpan: 1,
+    toolTip:true,
+    toolTipMessage:"Your CGPA up to the last completed semester"
   },
   {
     key: "target_cgpa",
@@ -20,6 +25,8 @@ export const columnConfig = [
     type: "number",
     placeholder: "Target CGPA",
     colSpan: 1,
+    toolTip:true,
+    toolTipMessage:"The CGPA you aim to achieve"
   },
   {
     key: "remaining_credits",
@@ -27,6 +34,8 @@ export const columnConfig = [
     type: "number",
     placeholder: "Remaining Credit Hours",
     colSpan: 1,
+    toolTip:true,
+    toolTipMessage:"Total credit hours you have left to complete your degree"
   },
 ];
 
@@ -65,9 +74,9 @@ export const ExampleCalculationsRows = [
     cells: [
       { content: "1" },
       { content: "Current Total Points" },
-      { content: "3.2 × 60 = 192", className: "font-mono" },
+      { content: "3.72 × 69 = 256.68", className: "font-mono" },
       {
-        content: "192 points",
+        content: "256.68 points",
         className: "font-semibold text-right text-blue-600",
       },
     ],
@@ -76,9 +85,9 @@ export const ExampleCalculationsRows = [
     cells: [
       { content: "2" },
       { content: "Target Total Points" },
-      { content: "3.5 × 90 = 315", className: "font-mono" },
+      { content: "3.69 × 88 = 324.72", className: "font-mono" },
       {
-        content: "315 points",
+        content: "324.72 points",
         className: "font-semibold text-right text-green-600",
       },
     ],
@@ -87,9 +96,9 @@ export const ExampleCalculationsRows = [
     cells: [
       { content: "3" },
       { content: "Required Points" },
-      { content: "315 - 192 = 123", className: "font-mono" },
+      { content: "324.72 - 256.68 = 68.04", className: "font-mono" },
       {
-        content: "123 points",
+        content: "68.04 points",
         className: "font-semibold text-right text-purple-600",
       },
     ],
@@ -99,9 +108,9 @@ export const ExampleCalculationsRows = [
     cells: [
       { content: "4", className: "font-bold" },
       { content: "Required GPA", className: "font-bold" },
-      { content: "123 ÷ 30 = 4.1", className: "font-mono" },
+      { content: "68.04 ÷ 19 = 3.58", className: "font-mono" },
       {
-        content: "4.1 GPA",
+        content: "3.58 GPA",
         className: "font-bold text-right text-gray-900",
       },
     ],

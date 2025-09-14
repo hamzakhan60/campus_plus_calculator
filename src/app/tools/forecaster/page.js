@@ -5,32 +5,45 @@ import DescriptionText from '@/components/DescriptionText';
 import MotivationCard from '@/components/MotivationCard';
 import FlexibleCalculator from '@/components/FlexibleCalculator';
 import ResultsSidebar from '@/components/ResultSidebar';
-import {ExampleCalculations} from '@/components/ExampleCalculations';
+import { ExampleCalculations } from '@/components/ExampleCalculations';
 import TipsSection from '@/components/TipsSection';
 import {
-  columnConfig,
-  cgpaTips,
-  ExampleCalculationsColumns,
-  ExampleCalculationsRows,
-  TargetCGPADescription,
+    columnConfig,
+    cgpaTips,
+    ExampleCalculationsColumns,
+    ExampleCalculationsRows,
+    TargetCGPADescription,
 } from "./helper";
+import { validateCourseField } from '@/utils/validation';
 
 const CGPAForecaster = () => {
-     const [cgpaData, setCgpaData] = useState([{
+    const [cgpaData, setCgpaData] = useState([{
         prev_credits: '',
         current_cgpa: '',
         target_cgpa: '',
         remaining_credits: ''
     }]);
-    const [requiredGPA, setRequiredGPA] =useState(null);
+    const [requiredGPA, setRequiredGPA] = useState(0.0);
 
-     const handleDataChange = (rowIndex, fieldKey, value) => {
+    const handleDataChange = (rowIndex, fieldKey, value) => {
+        let validatedInput = null;
+        if (fieldKey == "target_cgpa" || fieldKey == "current_cgpa")
+            validatedInput = validateCourseField({ field: "gpa", value });
+        else
+            validatedInput = validateCourseField({ field: "toalCredits", value });
         const newData = [...cgpaData];
         newData[rowIndex] = {
             ...newData[rowIndex],
-            [fieldKey]: value
+            [fieldKey]: validatedInput.value
         };
         setCgpaData(newData);
+        if (validatedInput.error) {
+            validatedInput.rowIndex = rowIndex;
+            validatedInput.fieldKey = fieldKey;
+            return validatedInput;
+        }
+        else
+            return null;
     };
 
     const calculateRequiredGPA = () => {
@@ -40,7 +53,7 @@ const CGPAForecaster = () => {
         const remainingCredits = parseFloat(row.remaining_credits) || 0;
         const targetCGPA = parseFloat(row.target_cgpa) || 0;
 
-        if (prevCredits === 0 || remainingCredits === 0) return null;
+        if (prevCredits === 0 || remainingCredits === 0) return 0.0;
 
         // Calculate required GPA
         const currentTotalPoints = prevCredits * currentCgpa;
@@ -56,13 +69,13 @@ const CGPAForecaster = () => {
         const calculatedGPA = calculateRequiredGPA();
         setRequiredGPA(calculatedGPA);
     }, [cgpaData]);
-     // Prepare result data for sidebar
+    // Prepare result data for sidebar
     const getResultData = () => {
         return {
             title: "CGPA Forecast Result",
             description: "This shows the required GPA you need to achieve your target CGPA.",
             resultRows: [
-                { label: "Current Credits", value: cgpaData[0].prev_credits, decimals: 0 },
+                { label: "Previous Credits", value: cgpaData[0].prev_credits, decimals: 0 },
                 { label: "Current CGPA", value: cgpaData[0].current_cgpa, decimals: 2 },
                 { label: "Target CGPA", value: cgpaData[0].target_cgpa, decimals: 2 },
                 { label: "Remaining Credits", value: cgpaData[0].remaining_credits, decimals: 0 },
@@ -70,13 +83,13 @@ const CGPAForecaster = () => {
             ],
             remarks: requiredGPA > 4.0 ? "Target may be unrealistic. Consider adjusting your target CGPA." :
                 requiredGPA >= 3.5 ? "Challenging but achievable! Focus on your studies." :
-                requiredGPA >= 3.0 ? "Moderate effort required. You can do it!" :
-                requiredGPA >= 2.0 ? "Manageable target. Stay consistent with your efforts." :
-                requiredGPA < 0 ? "You've already exceeded your target CGPA!" :
-                "Please enter valid values to see recommendations."
+                    requiredGPA >= 3.0 ? "Moderate effort required. You can do it!" :
+                        requiredGPA >= 2.0 ? "Manageable target. Stay consistent with your efforts." :
+                            requiredGPA < 0 ? "You've already exceeded your target CGPA!" :
+                                "Please enter valid values to see recommendations."
         };
     };
-     return (
+    return (
         <div style={{ backgroundImage: `url(/bg.jpg)` }} className="min-h-screen relative overflow-hidden">
             <div className="relative z-10">
                 {/* Header */}
