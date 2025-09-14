@@ -13,7 +13,7 @@ const TipsSection = ({
   borderColor = "border-blue-100",
   titleClassName = "font-semibold text-gray-900 mb-2",
   tipClassName = "text-sm text-gray-700 space-y-1",
-  containerClassName = "max-w-7xl mx-auto px-3 sm:px-6 pb-4 sm:pb-6 lg:pb-8",
+  containerClassName = "max-w-7xl mx-auto px-4 sm:px-4 pb-4 sm:pb-6 lg:pb-8",
   wrapperClassName = "",
   showBullets = true,
   bulletStyle = "•",
@@ -21,7 +21,7 @@ const TipsSection = ({
 }) => {
   return (
     <div className={containerClassName}>
-      <div className={`bg-gradient-to-r ${gradientFrom} ${gradientTo} rounded-2xl p-4 sm:p-6 lg:p-8 border ${borderColor} ${wrapperClassName}`}>
+      <div className={`bg-gradient-to-r ${gradientFrom} ${gradientTo} rounded-2xl p-4 sm:p-4 lg:p-4 border ${borderColor} ${wrapperClassName}`}>
         <div className="flex items-start space-x-2 sm:space-x-3">
           <div className={`${iconBgColor} w-7 h-7 sm:w-8 sm:h-8 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5 sm:mt-1`}>
             <IconComponent className={iconColor} size={iconSize} />

@@ -11,7 +11,7 @@ export const ExampleCalculations = ({
   cellClassName = "py-4 px-6 text-sm"
 }) => {
   return (
-    <div className={`max-w-7xl mx-auto px-6 py-8 ${className}`}>
+    <div className={`max-w-7xl mx-auto px-4 py-8 ${className}`}>
       <div className="bg-white rounded-2xl shadow-2xl p-8">
         {title && (
           <h3 className="text-2xl font-bold text-primary mb-6">{title}</h3>
